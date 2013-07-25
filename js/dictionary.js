@@ -2,17 +2,17 @@ languages =
     [
         {
             lang: "Spanish",
-		a1: "Episteme: Demostrador del Bazar Ágil",
+		a1: "demostrador job matching",
 		m1: "Búsqueda",
 		m2: "Candidatos",
 		m3: "Finalizar",
 		m4: "Cantidatos encontrados",
                 m4b: "Candidato encontrado",
 		m5: "Ayuda",
-                m5b: "Ayuda de Episteme",
+                m5b: "Ayuda de job matching",
 		m6: "Orden alfabético",
 		m7: "Orden semántico",
-                m8: "Notificación de Episteme",
+                m8: "Notificación de job matching",
 		m9: "Calculando orden semántico...",
 		m10: "Obteniendo resultados...",
 		b1: "Refinar búsqueda por nombre...",
@@ -77,9 +77,9 @@ languages =
 		j10:"¿Desea guardar los cambios?",
 		j11:"¡Búsqueda guardada correctamente!",
 
-		k1: "Selecciona primero si quieres buscar un candidato o crear un consorcio. De los consorcios puedes seleccionar uno que esté almacenado o crear otro nuevo. ",
+		k1: "Selecciona buscar un dandidato",
 		k2: "Después puedes proceder a definir la búsqueda. "
-                     +"En los campos que aparecen puedes seleccionar las características que quieres que tenga la entidad. "
+                     +"En los campos que aparecen puedes seleccionar las características que quieres que tenga el candidato. "
                      +"Dependiendo del orígen de los datos los campos pueden ser diferentes. "
                      +"Si lo que quieres es crear un consorcio puedes añadir más de una entidad pulsando sobre el [+] de las pestañas de entidades. "
                      +"Después podrás pulsar sobre cada caja de la entidad para ver las empresas que corresponden a los campos seleccionados en la búsqueda. ",
@@ -113,10 +113,13 @@ languages =
 		typePlaceHolder:"Texto libre...",
 		travel: "Con posibilidades de viajar",
 		travelHelp: "Marcar si se desean candidatos que tengan disponibilidad de viajar",
+		recommended: "recomendados",
+		pickSearch: "selecciona una ",
+		search: "búsqueda",
         },
         {
             lang: "English",
-		a1: "Episteme: Agile Bazaar demonstrator.",
+		a1: "job matching demonstrator.",
 		m1: "Search",
 		m2: "Candidates",
 		m3: "Finalize",
@@ -125,10 +128,10 @@ languages =
 		m5: "Help",
 		m6: "Alphabetical order",
 		m7: "Semantic order",
-                m8: "Episteme notification",
+                m8: "job matching notification",
                 m9: "Calculating semantic order...",
 		m10: "Loading results...",
-		m5b: "Episteme help",
+		m5b: "job matching help",
 		b1: "Refine search by name...",
 		b2: "Filter by category",
 		b3: "Apply filters",
@@ -227,6 +230,9 @@ languages =
 		typePlaceHolder:"Free text...",
 		travel: "Condition will travel",
 		travelHelp: "Check if desired candidates with travel condition",
+		recommended: "recommended",
+		pickSearch: "select a ",
+		search: "search",
         },
 
     ];

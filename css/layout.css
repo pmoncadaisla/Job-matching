@@ -19,7 +19,7 @@ body {
   float:left;
   width:100%;
   min-width: 880px;
-  background-color: #F2F3F4;
+  background-color: #fff;
   border-bottom: 2px solid #0099ff;
   -webkit-box-shadow: 0 2px 5px -2px rgba(0, 0, 0, .52);
   position:relative;
@@ -55,10 +55,10 @@ body {
  float:left;
  background: #FAFAF0;
  border-top: 1px solid #A0A0A0;
- -webkit-box-shadow: 0 -2px 5px -2px rgba(0, 0, 0, .52);
  width:100%;
  min-width: 880px;
  cursor:default;
+ padding: 20px 20px 20px 75px;
 }
 
 .gsiLogo{
@@ -156,7 +156,7 @@ body {
   opacity:0.9;
   border-radius: 0px 0px 5px 5px;
   width: 106px;
-  background:#496B86;
+  background:#0099ff;
 
 }
 .menuBarItem img{
@@ -371,7 +371,7 @@ z-index:-100;
   float: left;
   margin: 10px 10px 10px 10px; 
   background:white;
-  box-shadow: 0px 0px 10px #aaa;
+  box-shadow: 0px 0px 2px #aaa;
   border-radius: 5px;
   cursor:move;
 }
@@ -487,13 +487,13 @@ background-size: 25px 25px;
   opacity: 1;
 }
 .offer .draggableText{
-  background:#496B86;
+  background: #0099ff;
 }
 
 .draggableText{
   width: 126px; 
   height:16px;
-  background:#496B86;
+  background:#0099ff;
   color:#fff;
   padding: 2px;
   font-size: 12px;
@@ -574,14 +574,14 @@ margin-left: 70px;
 	float: left;
 }
 .page_navigation_text{
-        position: absolute;
-        bottom: 0;
-        right:0;
-	margin-bottom: 15px;
-        font-size: 14px;
-	color: #F04600;
-	text-shadow: 1px 1px 0 #EEE;
-        margin-right:5px;
+    position: absolute;
+    bottom: 0;
+    right:0;
+	  margin-bottom: 15px;
+    font-size: 14px;
+	  color: rgb(177, 177, 177)
+	  text-shadow: 1px 1px 0 #EEE;
+    margin-right:5px;
 }
 .page_navigation a, .alt_page_navigation a{
 	padding:3px 5px;
@@ -933,7 +933,7 @@ text-align: center;
 #blackText th{ 
   color:white;
   background:white;
-  background-color:#79A04B;
+  background-color:#0099ff;
   padding:5px;
   border-left:1px solid black;
 }
@@ -950,18 +950,20 @@ text-align: center;
   background-color:#E0E0E0;
 }
 #blackText h1{
-  background-color:#79A04B;
+  background-color:#0099ff;
   padding:5px;
   margin:5px;
   font-size: 25px;
   text-align:center;
   z-index:620;
+  font-weight: lighter;
 }
 #blackText h2{
   margin:5px;
   font-size: 18px;
   text-align:left;
   z-index:620;
+  font-weight: lighter;
 }
 #blackText p{
   max-width: 700px;
@@ -1246,7 +1248,6 @@ margin-top: 5px;
 
 .filterName {
 float: left;
-font-weight: bold;
 font-size: 15px;
 padding-top: 2px;
 }
@@ -1334,27 +1335,35 @@ height: 80px;
 }
 
 .selectOption.draggable{
-    width:400px;
-    height: 130px;
+    width:726px;
+    height: 212px;
 }
 .selectOption .textContainer{
-    width:400px;
-    height: 30px;
+    width: 726px;
+    height: 77px;
 }
 .selectOption .logoContainer{
-    width:400px;
-    height: 100px;
+    width:  508px;
+    height: 135px;
 }
 .selectOption .draggableText{
-    width:396px;
-    font-size: 16px;
-    padding-top:5px;
-    height:23px;
+    font-family: "helvetica-neue-lt-std-35-thin";
+    width: 728px;
+    font-size: 29px;
+    padding-top: 28px;
+    height: 47px;
+
 }
 .selectOption .defaultLogo{
   padding-top: 2px;
-  padding-left: 60px;
-  width: 280px;
+  padding-left: 214px;
+  width: 265px;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: gray;
 }
 
 .finalize.filter{
@@ -1393,4 +1402,35 @@ height: 80px;
 
 .epistemeLogo{
 	padding-left: 2em;
+}
+
+
+.titleText {
+  font-family: "helvetica-neue-lt-std-35-thin";
+  font-size: 32px;
+  padding-top: 27px;
+  color: black;
+}
+
+.colorBlue {
+  color: #0099ff;
+}
+
+.recommendedText{
+  font-family: "helvetica-neue-lt-std-35-thin";
+  font-size: 26px;
+}
+
+.headingText{
+  font-family: "helvetica-neue-lt-std-35-thin";
+  font-size: 31px;
+}
+
+#savedSearch img{
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter: gray;
 }

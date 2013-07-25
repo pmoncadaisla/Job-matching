@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/lib/kendo.metro.min.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/lib/jquery.confirm.css" type="text/css" media="screen">
     <link rel="stylesheet" href="css/layout.css" type="text/css" media="screen">
+    <link rel="stylesheet" href="css/fonts.css" type="text/css" media="screen">
     <!-- javascript libs-->
     <script type="text/javascript" src="js/lib/jquery-1.8.2.js"></script>
     <script type="text/javascript" src="js/lib/jquery-ui-1.9.1.custom.min.js"></script>
@@ -44,7 +45,7 @@
         <div id="header">
 	    <div id = "logo">
 		<a href="#" data-bind="click: $root.selectSearch.bind($data,'select')">
-                <img class="epistemeLogo" src="images/gsi_logo.png"/>
+                <div class="epistemeLogo titleText">job <span class="colorBlue">matching</span></div>
                 </a>
 		<br class="clear" />
             </div>
@@ -370,11 +371,9 @@
     <input id="search" data-bind="attr: { 'placeholder': lang().b1 }, value: filter, valueUpdate: 'afterkeydown'"/>
     </div>
     <div class="lines" id="Selectlines" data-bind="if: ($root.page() == 0 && $root.status() == 0) && $root.currentSearches.values().length > 0">
-        <img class="img" data-bind="attr: { 'src': $root.lang().i3 }">
+        <span class="headingText" data-bind="text: lang().pickSearch "></span> <span class="colorBlue headingText" data-bind="text: lang().search "></span>
     </div>
-    <div class="lines" id="Selectlines" data-bind="if: ($root.page() == 0.5 && $root.status() == 0)">
-        <img class="img" data-bind="attr: { 'src': $root.lang().i6 }">
-    </div>
+
 </div>
 
 <!-- DRAGGABLES -->
@@ -388,9 +387,9 @@
 <div id="draggableElements" class="main" data-bind="visible: page() != 0 || status() != 1">
 
     <!-- SELECT OPTION -->
-    <div data-bind="visible: page() == 0.5">
+    <div data-bind="visible: page() == 0.5">      
 
-      <div class="draggable offer clickableOffers selectOption" data-bind="click: $root.selectSearch.bind($data,'new_search')">
+      <div class="draggable offer clickableOffers selectOption" data-bind="click: $root.selectSearch.bind($data,'start')">
         <div class="logoContainer">
           <img class="defaultLogo" src="images/search.png"/>
         </div>
@@ -399,19 +398,10 @@
         </div>
       </div>
 
-      <div class="draggable offer clickableOffers selectOption" data-bind="click: $root.selectSearch.bind($data,'start')">
-        <div class="logoContainer">
-          <img class="defaultLogo" src="images/network.png"/>
-        </div>
-        <div class="textContainer">
-          <p class="draggableText" data-bind="text: $root.lang().newPartnership"></p>
-        </div>
-      </div>
-
     </div>
 
   <!-- SELECT SAVED SEARCH -->
-  <div data-bind="foreach: $root.currentSearches.values, visible: page() == 0 && status() == 0, css: { content: page() == 0}">
+  <div id="savedSearch" data-bind="foreach: $root.currentSearches.values, visible: page() == 0 && status() == 0, css: { content: page() == 0}">
     <div class="draggable offer clickableOffers" data-bind="click: $root.loadComposeSearch.bind($data, $data.id())">
       <div class="draggableInfo" data-bind="attr: { 'title': $data.about() }">?</div>
       <div class="deleteOffer" data-bind="click: $root.doDeleteJSON.bind($data, $data), clickBubble: false">X</div>
@@ -556,7 +546,7 @@
 <!-- RECOMMENDED CONTAINER -->
 <div class="recommended" data-bind="visible: page() == 1 && $root.viewData().length > 0">
   <div class="lines" id="recommendedLines" data-bind="visible: page() == 1 && status() == 1">
-    <img class="img" data-bind="attr: { 'src': $root.lang().i7 }">
+      <p class="recommendedText" data-bind="text: lang().recommended "></p>
   </div>
   <div id="draggableElements" data-bind="visible: page() != 0 || status() != 1">
     <!-- RECOMMENDED RESULT -->
