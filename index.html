@@ -484,7 +484,7 @@
     <!-- ko if: $root.page() == 1 && $root.option() == 0 -->
     <div id="draggable" class="draggable draggableCompanies semanticCompanies" data-bind="attr: { 'name': $data.name, 'province': $data.Province}">
       <div class="draggableInfo" data-bind="click: $root.activateHelp.bind($data,'company',$data['lmf.uri']()), clickBubble: false
-           ,attr: { 'title': '<b>'+$data.name()+'</b>'}">?</div>
+           ,attr: { 'title': '<b>'+$data.name()+'</b><br>Similarity: '+$data.weight()}">?</div>
       <div class="companyMedal"></div>
       <div class="logoContainer">
         <!-- ko if: $data.logo != undefined -->
