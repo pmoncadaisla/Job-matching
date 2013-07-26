@@ -1,3 +1,6 @@
+var demoMode = true;
+
+
 $(document).ready(function () {
     ko.utils.stringContains = function (string, contain) {
         string = string.toLowerCase();
@@ -20,10 +23,11 @@ $(document).ready(function () {
     ko.observableArray.fn.sortByNumberAsc = function (prop) {
         this.sort(function (obj1, obj2) {
             if (obj1[prop]() == obj2[prop]()) return 0;
-            else if (parseInt(obj1[prop]()) > parseInt(obj2[prop]())) return -1;
+            else if (parseFloat(obj1[prop]()) > parseFloat(obj2[prop]())) return -1;
             else return 1;
         });
     }
+
     ko.observableArray.fn.sortByPropertyDesc = function (prop) {
         this.sort(function (obj1, obj2) {
             if (obj1[prop]() == obj2[prop]()) return 0;
@@ -615,24 +619,28 @@ $(document).ready(function () {
             });
         };
         self.doSaveJSON = function () {
-            self.currentSearch.changed('false');
-            var unmapped = ko.mapping.toJS(self.currentSearch);
-            var data = JSON.stringify(unmapped);
-            var name = self.currentSearch.name();
-            var id = self.currentSearch.id();
-            var tmp = {
-                "id": self.currentSearch.id(),
-                "name": self.currentSearch.name(),
-                "logo": self.currentSearch.logo(),
-                "about": self.currentSearch.about(),
+            if(!demoMode){
+                self.currentSearch.changed('false');
+                var unmapped = ko.mapping.toJS(self.currentSearch);
+                var data = JSON.stringify(unmapped);
+                var name = self.currentSearch.name();
+                var id = self.currentSearch.id();
+                var tmp = {
+                    "id": self.currentSearch.id(),
+                    "name": self.currentSearch.name(),
+                    "logo": self.currentSearch.logo(),
+                    "about": self.currentSearch.about(),
+                }
+                self.addSearchJSON(id, data);
+                self.currentSearches.values.remove(function (item) {
+                    return item.id() == id
+                })
+                self.currentSearches.values.push(ko.mapping.fromJS(tmp));
+                self.addSearchesJSON();
+                infoModal(self.lang().j11);
+            }else{
+                infoModal(self.lang().demo);
             }
-            self.addSearchJSON(id, data);
-            self.currentSearches.values.remove(function (item) {
-                return item.id() == id
-            })
-            self.currentSearches.values.push(ko.mapping.fromJS(tmp));
-            self.addSearchesJSON();
-            infoModal(self.lang().j11);
         };
         self.doLoadJSON = function (name) {
             self.getSearchJSON(name);
@@ -672,24 +680,32 @@ $(document).ready(function () {
             });
         };
         self.doDeleteJSON = function (item) {
-            deleteOfferModal(function (result) {
-                if (result) {
-                    self.deleteSearchJSON(item.id());
-                    self.currentSearches.values.remove(item);
-                    self.addSearchesJSON();
-                    self.reload();
-                } else {}
-            });
+            if(!demoMode){
+                deleteOfferModal(function (result) {
+                    if (result) {
+                        self.deleteSearchJSON(item.id());
+                        self.currentSearches.values.remove(item);
+                        self.addSearchesJSON();
+                        self.reload();
+                    } else {}
+                });
+            }else{
+                infoModal(self.lang().demo);
+            }
         };
         self.deleteSearchJSON = function (name) {
-            $.ajax({
-                type: "DELETE",
-                url: endPointJSON + "episteme.search." + name,
-                success: function (data) {},
-                error: function () {
-                    //alert("Error al eliminar el JSON");
-                }
-            });
+            if(!demoMode){
+                $.ajax({
+                    type: "DELETE",
+                    url: endPointJSON + "episteme.search." + name,
+                    success: function (data) {},
+                    error: function () {
+                        //alert("Error al eliminar el JSON");
+                    }
+                });
+            }else{
+                console.log("Demo mode");
+            }
         };
         self.getSearchJSON = function (name) {
             $.getJSON(endPointJSON + "episteme.search." + name, function (searchData) {
@@ -711,36 +727,44 @@ $(document).ready(function () {
             });
         }
         self.addSearchesJSON = function () {
+            if(!demoMode){
             var unmapped = ko.mapping.toJS(self.currentSearches);
             var data = JSON.stringify(unmapped);
-            $.ajax({
-                type: "POST",
-                url: endPointJSON + "episteme.searches",
-                data: JSON.stringify([data]),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    console.log("Subido");
-                },
-                error: function () {
-                    //alert("Error al guardar");
-                }
-            });
+                $.ajax({
+                    type: "POST",
+                    url: endPointJSON + "episteme.searches",
+                    data: JSON.stringify([data]),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        console.log("Subido");
+                    },
+                    error: function () {
+                        //alert("Error al guardar");
+                    }
+                });
+            }else{
+                console.log("This is demo mode, no saving enabled");
+            }
         };
         self.addSearchJSON = function (name, json) {
-            $.ajax({
-                type: "POST",
-                url: endPointJSON + "episteme.search." + name,
-                data: JSON.stringify([json]),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-                    console.log("Subido");
-                },
-                error: function () {
-                    //alert("Error al guardar");
-                }
-            });
+            if(!demoMode){
+                $.ajax({
+                    type: "POST",
+                    url: endPointJSON + "episteme.search." + name,
+                    data: JSON.stringify([json]),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data) {
+                        console.log("Subido");
+                    },
+                    error: function () {
+                        //alert("Error al guardar");
+                    }
+                });
+            }else{
+                console.log("This is demo mode, no saving enabled");
+            }
         };
         self.changeURL = function (url) {
             sammyPlugin.trigger('redirectEvent', {
