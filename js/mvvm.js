@@ -560,6 +560,7 @@ $(document).ready(function () {
                     //console.log("Alldata es: " + data); 
                     var parsedJSON = JSON.parse(data);
                     if (self.currentSearch.result()[entity_index].semantic() != '' && self.currentSearch.result()[entity_index].isSemantic() == 'true') {
+                        
                         $.growlUI(self.lang().m8 + ':', self.lang().m9);
                         var jsonEmpresas = JSON.stringify(parsedJSON);
                         var unmapped = ko.mapping.toJS(self.currentSearch);
@@ -595,23 +596,27 @@ $(document).ready(function () {
                                 
                                 
                                 //console.log(JSON.stringify(parsedJSON));
+                                self.semanticOrder(true);
                                 ko.mapping.fromJS(parsedJSON, self.companiesData);
                                 ko.mapping.fromJS(parsedJSON, self.viewData);
                                 ko.mapping.fromJS(parsedJSON, self.recommendedData);
                                 self.recommendedData.sortByNumberAsc('Ranking');
-                                self.viewData.sortByNumberAsc('weight');
-                                self.semanticOrder(true);
+                                self.viewData.sortByNumberAsc('weight');                                
                                 $(".dragContainer").hide().fadeIn();
                                 self.reload();
                             })
                         });
                     } else {
+                        for(var i=0; i < parsedJSON.length; i++){
+                            parsedJSON[i]["weight"] = "Off";
+                        }
+                        
+                        self.semanticOrder(false);
                         ko.mapping.fromJS(parsedJSON, self.companiesData);
                         ko.mapping.fromJS(parsedJSON, self.viewData);
                         ko.mapping.fromJS(parsedJSON, self.recommendedData);
                         self.recommendedData.sortByNumberAsc('Ranking');
-                        self.viewData.sortByPropertyAsc('name');
-                        self.semanticOrder(false);
+                        self.viewData.sortByPropertyAsc('name');                        
                         $(".dragContainer").hide().fadeIn();
                         self.reload();
                     }
