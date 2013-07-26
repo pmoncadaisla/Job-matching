@@ -1,5 +1,6 @@
 var demoMode = true;
 
+var dataParsed;
 
 $(document).ready(function () {
     ko.utils.stringContains = function (string, contain) {
@@ -317,7 +318,27 @@ $(document).ready(function () {
             if (self.semanticOrder() && self.filter() == '') {
                 $('.semanticCompanies').each(function (index) {
                     var stallFor = 50 * parseInt(index);
-                    var value = 1 / (index / 5)
+                    //var value = 1 / (index / 5);
+                                        
+                    
+
+                    dataParsed.sort(function(a,b){
+                        if(a.weight == b.weight)
+                            return 0;
+                        if(a.weight< b.weight)
+                            return 1;
+                        if(a.weight > b.weight)
+                            return -1;
+                    });
+                    var max = dataParsed[0].weight;
+                    var min = dataParsed[dataParsed.length -1].weight;
+
+                    var value = (dataParsed[index].weight-min)/(max-min);
+                    value = (1-value)*3;
+                    value = 1 - value;
+
+                    //console.log("Opacity value for index "+index+": "+value);
+
                     $(this).animate({
                         opacity: value
                     }, 200);
@@ -581,7 +602,7 @@ $(document).ready(function () {
 
                                 var semanticJson = JSON.parse(data);
                                 var parsedJSON = JSON.parse(jsonEmpresas);
-
+                                dataParsed = parsedJSON;
 
                                 for(var i=0; i < parsedJSON.length; i++){
                                 	var uri = parsedJSON[i]["lmf.uri"];
@@ -601,7 +622,8 @@ $(document).ready(function () {
                                 ko.mapping.fromJS(parsedJSON, self.viewData);
                                 ko.mapping.fromJS(parsedJSON, self.recommendedData);
                                 self.recommendedData.sortByNumberAsc('Ranking');
-                                self.viewData.sortByNumberAsc('weight');                                
+                                self.viewData.sortByNumberAsc('weight');
+
                                 $(".dragContainer").hide().fadeIn();
                                 self.reload();
                             })
@@ -610,7 +632,7 @@ $(document).ready(function () {
                         for(var i=0; i < parsedJSON.length; i++){
                             parsedJSON[i]["weight"] = "Off";
                         }
-                        
+
                         self.semanticOrder(false);
                         ko.mapping.fromJS(parsedJSON, self.companiesData);
                         ko.mapping.fromJS(parsedJSON, self.viewData);
@@ -976,3 +998,24 @@ $(document).ready(function () {
     // Activates knockout.js
     ko.applyBindings(new AppViewModel());
 });
+
+function sortJsonArrayByProperty(objArray, prop, direction){
+    if (arguments.length<2) throw new Error("sortJsonArrayByProp requires 2 arguments");
+    var direct = arguments.length>2 ? arguments[2] : 1; //Default to ascending
+
+    if (objArray && objArray.constructor===Array){
+        var propPath = (prop.constructor===Array) ? prop : prop.split(".");
+        objArray.sort(function(a,b){
+            for (var p in propPath){
+                if (a[propPath[p]] && b[propPath[p]]){
+                    a = a[propPath[p]];
+                    b = b[propPath[p]];
+                }
+            }
+            // convert numeric strings to integers
+            a = a.match(/^\d+$/) ? +a : a;
+            b = b.match(/^\d+$/) ? +b : b;
+            return ( (a < b) ? -1*direct : ((a > b) ? 1*direct : 0) );
+        });
+    }
+}
